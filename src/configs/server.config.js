@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 module.exports = {
-    port:3030
+    port:process.env.PORT
 }

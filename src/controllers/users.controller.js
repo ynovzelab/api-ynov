@@ -41,16 +41,22 @@ exports.register = (req, res) => {
 };
 
 exports.login = (req, res) => {
+  console.log(req.body);
   User.findOne({
     email: req.body.email,
   })
     .then((user) => {
+      if (!user) {
+        return res.status(404).send({
+          message: `no user finf with email ${req.body.email}`,
+        });
+      }
       let passwordIsValid = bcrypt.compareSync(
         req.body.password,
         user.password
       );
       if (!passwordIsValid) {
-        res.status(401).send({
+        return res.status(401).send({
           auth: false,
           token: null,
         });
@@ -72,13 +78,30 @@ exports.login = (req, res) => {
       });
     })
     .catch((err) => {
-      res.send(err);
+      res.status(404).send(err);
     });
 };
 
 exports.logout = (req, res) => {
-    res.status(200).send({
-        auth: false,
-        token: null
+  res.status(200).send({
+    auth: false,
+    token: null,
+  });
+};
+
+exports.getMe = (req, res) => {
+  User.findById(req.params.id)
+    .then((user) => {
+      if (!user) {
+        return res.status(404).send({
+          message: `user not found with id ${req.params.id}`,
+        });
+      }
+      res.send(user);
+    })
+    .catch((err) => {
+      return res.status(404).send({
+        message: err.message,
+      });
     });
-}
+};

@@ -8,7 +8,7 @@ module.exports = {
     product: (parent, args) => {
       console.log(args.id);
       return Product.findById(args.id);
-    },
+    }
   },
   Mutation: {
     createProduct: (parent, args) => {

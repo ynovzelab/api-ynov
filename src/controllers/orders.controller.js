@@ -1,5 +1,4 @@
 import Order from "../models/order.model";
-const Joi = require('Joi');
 
 exports.createOrder = (req, res) => {
     
@@ -8,8 +7,6 @@ exports.createOrder = (req, res) => {
         products: req.body.products,
         user: req.body.user
     })
-
-
 
     order.save()
         .then((data) => { res.send(data) })

@@ -2,5 +2,7 @@
 
 var productResolver = require('./product.resolver');
 
-module.exports = [productResolver //touts les resolvers
+var orderResolver = require('./order.resolver');
+
+module.exports = [productResolver, orderResolver //touts les resolvers
 ];

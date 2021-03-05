@@ -9,5 +9,9 @@ var _require = require('apollo-server-express'),
 
 var productSchema = require('./product.schema.js');
 
+var orderSchema = require('./order.schema.js');
+
+var userSchema = require('./user.schema.js');
+
 var linkSchema = gql(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    type Query {\n        _:Boolean\n    }\n    type Mutation {\n        _: Boolean\n    }\n"])));
-module.exports = [linkSchema, productSchema];
+module.exports = [linkSchema, productSchema, orderSchema, userSchema];

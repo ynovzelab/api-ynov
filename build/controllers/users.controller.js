@@ -1,5 +1,9 @@
 "use strict";
 
+var _user = _interopRequireDefault(require("../middlewares/validators/user.validation"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
 var User = require('../models/user.model');
 
 var bcrypt = require('bcrypt');
@@ -18,6 +22,15 @@ exports.register = function (req, res) {
     age: req.body.age,
     password: hashedPassword
   });
+
+  var validation = _user["default"].validate(req.body);
+
+  console.log(validation);
+
+  if (validation.error) {
+    return res.status(400).send(validation.error);
+  }
+
   user.save().then(function (data) {
     var userToken = jwt.sign({
       id: data._id,

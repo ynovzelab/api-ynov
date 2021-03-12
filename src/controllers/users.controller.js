@@ -57,7 +57,9 @@ exports.login = (req, res) => {
     .then((user) => {
       if (!user) {
         return res.status(404).send({
-          message: `no user finf with email ${req.body.email}`,
+          auth: false,
+          token: null,
+          message: `no user finf with email ${req.body.email}`
         });
       }
       let passwordIsValid = bcrypt.compareSync(
@@ -68,6 +70,7 @@ exports.login = (req, res) => {
         return res.status(401).send({
           auth: false,
           token: null,
+          message:"password invalid"
         });
       }
       let userToken = jwt.sign(

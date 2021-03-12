@@ -1,5 +1,9 @@
 "use strict";
 
+var _cors = _interopRequireDefault(require("cors"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
 var express = require('express');
 
 var bodyParser = require('body-parser');
@@ -29,6 +33,7 @@ graphQlServer.applyMiddleware({
   path: "/graphql"
 });
 app.use(bodyParser.json());
+app.use((0, _cors["default"])());
 app.use('/api/v1', apiRouter);
 
 exports.start = function () {

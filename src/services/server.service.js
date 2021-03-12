@@ -10,6 +10,8 @@ import cors from "cors";
 
 const { ApolloServer, gql } = require('apollo-server-express');
 
+app.use(cors());
+
 const graphQlServer = new ApolloServer({
   typeDefs : schema,
   resolvers
@@ -18,7 +20,6 @@ const graphQlServer = new ApolloServer({
 graphQlServer.applyMiddleware({ app, path: "/graphql" });
 
 app.use(bodyParser.json());
-app.use(cors());
 
 app.use('/api/v1', apiRouter);
 

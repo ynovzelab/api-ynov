@@ -65,7 +65,8 @@ exports.login = function (req, res) {
     if (!passwordIsValid) {
       return res.status(401).send({
         auth: false,
-        token: null
+        token: null,
+        message: "password invalid"
       });
     }
 
